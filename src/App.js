@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import UserGrid from './components/Profile/UserGrid';
 
 // This example shows how to render two different screens
 // (or the same screen in a different context) at the same URL,
@@ -67,37 +69,33 @@ class ModalSwitch extends Component {
     }
 }
 
+const Image = styled.div`
+    width: 305px;
+    height: 305px;
+    background: no-repeat center/150% url(/img/${({ index }) => index}.jpeg);
+    ${props =>
+        !props.inModal &&
+        css`
+            :hover {
+                opacity: 0.7;
+            }
+        `}
+`;
+
 const IMAGES = [
-    { id: 0, title: 'Dark Orchid', color: 'DarkOrchid' },
-    { id: 1, title: 'Lime Green', color: 'LimeGreen' },
-    { id: 2, title: 'Tomato', color: 'Tomato' },
-    { id: 3, title: 'Seven Ate Nine', color: '#789' },
-    { id: 4, title: 'Crimson', color: 'Crimson' }
+    { id: 1, title: 'trash Tree' },
+    { id: 2, title: 'blue sky' },
+    { id: 3, title: 'girl in water' },
+    { id: 4, title: 'white city' },
+    { id: 5, title: 'blur water' },
+    { id: 6, title: 'cool girl' },
+    { id: 7, title: 'beach view' },
+    { id: 8, title: 'bird view' },
+    { id: 9, title: 'small town' },
+    { id: 10, title: 'water dropping' },
+    { id: 11, title: 'water fall' },
+    { id: 12, title: 'cool door' }
 ];
-
-function Thumbnail({ color }) {
-    return (
-        <div
-            style={{
-                width: 50,
-                height: 50,
-                background: color
-            }}
-        />
-    );
-}
-
-function Image({ color }) {
-    return (
-        <div
-            style={{
-                width: '100%',
-                height: 400,
-                background: color
-            }}
-        />
-    );
-}
 
 function Home() {
     return (
@@ -116,41 +114,50 @@ function Home() {
     );
 }
 
+const PhotoGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 305px);
+    grid-gap: 20px;
+    justify-content: center;
+`;
+
 function Gallery() {
     return (
         <div>
-            {IMAGES.map(i => (
-                <Link
-                    key={i.id}
-                    to={{
-                        pathname: `/img/${i.id}`,
-                        // this is the trick!
-                        state: { modal: true }
-                    }}
-                >
-                    <Thumbnail color={i.color} />
-                    <p>{i.title}</p>
-                </Link>
-            ))}
+            <UserGrid />
+            <PhotoGrid>
+                {IMAGES.map(i => (
+                    <Link
+                        key={i.id}
+                        to={{
+                            pathname: `/img/${i.id}`,
+                            // this is the trick!
+                            state: { modal: true }
+                        }}
+                    >
+                        <Image index={i.id} />
+                    </Link>
+                ))}
+            </PhotoGrid>
         </div>
     );
 }
 
 function ImageView({ match }) {
-    let image = IMAGES[parseInt(match.params.id, 10)];
+    let image = IMAGES[parseInt(match.params.id, 10) - 1];
 
     if (!image) return <div>Image not found</div>;
 
     return (
         <div>
             <h1>{image.title}</h1>
-            <Image color={image.color} />
+            <Image index={image.id} />
         </div>
     );
 }
 
 function Modal({ match, history }) {
-    let image = IMAGES[parseInt(match.params.id, 10)];
+    let image = IMAGES[parseInt(match.params.id, 10) - 1];
 
     if (!image) return null;
 
@@ -184,7 +191,7 @@ function Modal({ match, history }) {
                 }}
             >
                 <h1>{image.title}</h1>
-                <Image color={image.color} />
+                <Image index={image.id} inModal />
                 <button type="button" onClick={back}>
                     Close
                 </button>
