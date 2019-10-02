@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import UserGrid from './components/Profile/UserGrid';
 import Modal from './components/Modal/Modal';
 import { IMAGES } from './components/Posts/index';
