@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import UserGrid from './components/Profile/UserGrid';
+import Modal from './components/Modal/Modal';
+import { IMAGES } from './components/Posts/index';
+import { Image } from './components/ImageComp/Image';
 
 // This example shows how to render two different screens
 // (or the same screen in a different context) at the same URL,
@@ -69,34 +72,6 @@ class ModalSwitch extends Component {
     }
 }
 
-const Image = styled.div`
-    width: 305px;
-    height: 305px;
-    background: no-repeat center/150% url(/img/${({ index }) => index}.jpeg);
-    ${props =>
-        !props.inModal &&
-        css`
-            :hover {
-                opacity: 0.7;
-            }
-        `}
-`;
-
-const IMAGES = [
-    { id: 1, title: 'trash Tree' },
-    { id: 2, title: 'blue sky' },
-    { id: 3, title: 'girl in water' },
-    { id: 4, title: 'white city' },
-    { id: 5, title: 'blur water' },
-    { id: 6, title: 'cool girl' },
-    { id: 7, title: 'beach view' },
-    { id: 8, title: 'bird view' },
-    { id: 9, title: 'small town' },
-    { id: 10, title: 'water dropping' },
-    { id: 11, title: 'water fall' },
-    { id: 12, title: 'cool door' }
-];
-
 function Home() {
     return (
         <div>
@@ -152,50 +127,6 @@ function ImageView({ match }) {
         <div>
             <h1>{image.title}</h1>
             <Image index={image.id} />
-        </div>
-    );
-}
-
-function Modal({ match, history }) {
-    let image = IMAGES[parseInt(match.params.id, 10) - 1];
-
-    if (!image) return null;
-
-    let back = e => {
-        e.stopPropagation();
-        history.goBack();
-    };
-
-    return (
-        <div
-            onClick={back}
-            style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                bottom: 0,
-                right: 0,
-                background: 'rgba(0, 0, 0, 0.15)'
-            }}
-        >
-            <div
-                className="modal"
-                style={{
-                    position: 'absolute',
-                    background: '#fff',
-                    top: 25,
-                    left: '10%',
-                    right: '10%',
-                    padding: 15,
-                    border: '2px solid #444'
-                }}
-            >
-                <h1>{image.title}</h1>
-                <Image index={image.id} inModal />
-                <button type="button" onClick={back}>
-                    Close
-                </button>
-            </div>
         </div>
     );
 }

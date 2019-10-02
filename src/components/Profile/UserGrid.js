@@ -47,10 +47,7 @@ const UserGrid = props => {
                 knausgaard roof party vegan, literally tbh crucifix taxidermy
                 wolf four loko air plant cliche fingerstache. Shaman locavore
                 vexillologist taiyaki lomo chambray. Church-key organic tbh,
-                gastropub swag marfa tofu poutine skateboard ennui woke salvia
-                8-bit everyday carry iceland. Flannel retro viral fanny pack
-                kogi tbh chartreuse VHS shaman prism locavore cred twee jianbing
-                lomo. Pickled brooklyn selvage banjo.
+                gastropub swag marfa tofu poutine skateboard ennui woke salvia.
             </Description>
         </UserGridStyled>
     );
