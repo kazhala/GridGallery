@@ -7,8 +7,6 @@ import {
     Redirect
 } from 'react-router-dom';
 import Modal from './components/Modal/Modal';
-import { IMAGES } from './components/Posts/ImagesDB';
-import { Image } from './components/ImageComp/Image';
 import Gallery from './components/Gallery/Gallery';
 
 // This example shows how to render two different screens
