@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import UserGrid from './components/Profile/UserGrid';
 import Modal from './components/Modal/Modal';
-import { IMAGES } from './components/Posts/index';
+import { IMAGES } from './components/Posts/ImagesDB';
 import { Image } from './components/ImageComp/Image';
+import Gallery from './components/Gallery/Gallery';
 
 // This example shows how to render two different screens
 // (or the same screen in a different context) at the same URL,
@@ -85,35 +85,6 @@ function Home() {
                     <Link to="/img/4">Crimson</Link>
                 </li>
             </ul>
-        </div>
-    );
-}
-
-const PhotoGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 305px);
-    grid-gap: 20px;
-    justify-content: center;
-`;
-
-function Gallery() {
-    return (
-        <div>
-            <UserGrid />
-            <PhotoGrid>
-                {IMAGES.map(i => (
-                    <Link
-                        key={i.id}
-                        to={{
-                            pathname: `/img/${i.id}`,
-                            // this is the trick!
-                            state: { modal: true }
-                        }}
-                    >
-                        <Image index={i.id} />
-                    </Link>
-                ))}
-            </PhotoGrid>
         </div>
     );
 }
