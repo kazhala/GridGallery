@@ -6,6 +6,11 @@ export const ProfileImage = styled.div`
     background: no-repeat center/170% url(/img/6.jpeg);
     border-radius: 100px;
     margin: 40px;
+    @media (max-width: 990px) {
+        margin: 20px;
+        width: 120px;
+        height: 120px;
+    }
     ${props =>
         props.mini &&
         css`
@@ -13,5 +18,9 @@ export const ProfileImage = styled.div`
             height: 50px;
             margin: 5px;
             align-self: center;
+            @media (max-width: 990px) {
+                width: 50px;
+                height: 50px;
+            }
         `}
 `;

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import styled from 'styled-components';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Redirect
+} from 'react-router-dom';
 import Modal from './components/Modal/Modal';
 import { IMAGES } from './components/Posts/ImagesDB';
 import { Image } from './components/ImageComp/Image';
@@ -64,7 +69,7 @@ class ModalSwitch extends Component {
                 <Switch location={isModal ? this.previousLocation : location}>
                     <Route exact path="/" component={Home} />
                     <Route path="/gallery" component={Gallery} />
-                    <Route path="/img/:id" component={ImageView} />
+                    <Redirect from="/img/:id" to="/gallery" />
                 </Switch>
                 {isModal ? <Route path="/img/:id" component={Modal} /> : null}
             </div>
@@ -85,19 +90,6 @@ function Home() {
                     <Link to="/img/4">Crimson</Link>
                 </li>
             </ul>
-        </div>
-    );
-}
-
-function ImageView({ match }) {
-    let image = IMAGES[parseInt(match.params.id, 10) - 1];
-
-    if (!image) return <div>Image not found</div>;
-
-    return (
-        <div>
-            <h1>{image.title}</h1>
-            <Image index={image.id} />
         </div>
     );
 }

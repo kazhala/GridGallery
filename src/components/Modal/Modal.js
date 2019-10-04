@@ -20,6 +20,11 @@ const ModalStyled = styled.div`
     right: 25%;
     border: 2px solid #444;
     width: 600px;
+    @media (max-width: 990px) {
+        left: 0;
+        right: 0;
+        width: auto;
+    }
 `;
 
 function Modal({ match, history }) {

@@ -16,6 +16,11 @@ const PhotoGrid = styled.div`
             grid-auto-rows: 200px;
             grid-gap: 5px;
         `}
+    @media (max-width: 990px) {
+        grid-gap: 5px;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: calc(33vw - 10px);
+    }
 `;
 
 const ImageLink = styled(Link)`
@@ -25,7 +30,7 @@ const ImageLink = styled(Link)`
         opacity: 0.7;
     }
     ${props =>
-        props.cascade &&
+        props.casc === 'true' &&
         css`
             &:nth-child(2n) {
                 grid-row-start: span 2;
@@ -72,7 +77,7 @@ function Gallery(props) {
                 {IMAGES.map(i => (
                     <ImageLink
                         key={i.id}
-                        cascade={cascade}
+                        casc={cascade ? 'true' : null}
                         index={i.id}
                         to={{
                             pathname: `/img/${i.id}`,
